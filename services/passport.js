@@ -28,21 +28,19 @@ passport.use(
     },
     // We also pass the strategy a callback function, telling us what to do
     // with the info that is returned
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          // we already have a record of the given profile.id
-          // call done(), which takes an error as the first argument
-          // and the relevant record as the second argument
-          done(null, existingUser);
-        } else {
-          // no record for the profile.id, so make a new record
-          // then call done() in the same manner as above
-          new User({ googleId: profile.id }).save().then(user => {
-            done(null, user);
-          });
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        // we already have a record of the given profile.id
+        // call done(), which takes an error as the first argument
+        // and the relevant record as the second argument
+        done(null, existingUser);
+      } else {
+        // no record for the profile.id, so make a new record
+        // then call done() in the same manner as above
+        const user = await new User({ googleId: profile.id }).save();
+        done(null, user);
+      }
     }
   )
 );

@@ -9,4 +9,3 @@ But really it's just a demonstration... Planned features include:
 * NoSQL backend database (MongoDB, via mLab)
 * Payments (will be via Stripe)
 * Front-end client build with React/Redux
-
