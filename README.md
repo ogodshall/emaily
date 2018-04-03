@@ -9,3 +9,4 @@ But really it's just a demonstration... Planned features include:
 * NoSQL backend database (MongoDB, via mLab)
 * Payments (will be via Stripe)
 * Front-end client build with React/Redux
+* Material Design styling for the front-end care of Materialize CSS

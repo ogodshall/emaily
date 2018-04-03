@@ -12,12 +12,18 @@ module.exports = app => {
   );
 
   // Callback required by the Google OAuth process
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys');
+    }
+  );
 
   // Logs the user out, empties the token from their cookie
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
 
   // Lists the user info for the current users, confirming successful login
