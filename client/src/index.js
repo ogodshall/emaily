@@ -15,6 +15,8 @@ const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 // initial rendering of our App (which contains all of our components) onto
 // the DOM of index.html (located up in the public folder)
+// We wrap the App component in a Provider, which lets us attach the Redux
+// store to our application
 ReactDOM.render(
   <Provider store={store}>
     <App />
