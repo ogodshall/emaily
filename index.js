@@ -37,7 +37,9 @@ require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
+  // Allows for requests to access JS and CSS resources from the client build
   app.use(express.static('client/build'));
+  // Defaults all other unknown routes to index.html
   const path = require('path');
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
