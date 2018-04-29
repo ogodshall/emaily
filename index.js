@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 
 // Connects us to the externally hosted MongoDB database
@@ -14,9 +15,11 @@ mongoose.connect(keys.mongoURI);
 const app = express();
 
 // Middleware
+// * * * * *
 // bodyParser:
 // Parses request data and puts it into res.body
 app.use(bodyParser.json());
+// * * * * *
 // cookieSession:
 // Configures the cookie that will be used for login
 // maxAge is the amount of time in milliseconds that a cookie lasts
@@ -27,6 +30,7 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
+// * * * * *
 // passport:
 // Assists in user authentication
 app.use(passport.initialize());
@@ -35,7 +39,9 @@ app.use(passport.session());
 // Calls the various routes, passing them "app" as an argument
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
+// Sets up front-end routing for production
 if (process.env.NODE_ENV === 'production') {
   // Allows for requests to access JS and CSS resources from the client build
   app.use(express.static('client/build'));

@@ -10,3 +10,4 @@ But really it's just a demonstration... Planned features include:
 * Payments (will be via Stripe)
 * Front-end client build with React/Redux
 * Material Design styling for the front-end care of Materialize CSS
+* Email services provided generously by SendGrid

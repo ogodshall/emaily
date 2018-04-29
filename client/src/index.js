@@ -7,6 +7,8 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
+import axios from 'axios';
+window.axios = axios;
 
 // creates the 'store' that will be used to hold our application state
 // takes three arguments: a reducer, the starting state, and a call
